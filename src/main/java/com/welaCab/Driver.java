@@ -14,7 +14,7 @@ public class Driver {
     private String phoneNumber;
     private String vehicleName;
     private String plateNumber;
-    private boolean Available;
+    private boolean available;
 
     public long getId() {
         return id;
@@ -34,7 +34,7 @@ public class Driver {
     }
 
     public boolean isAvailable() {
-        return Available;
+        return available;
     }
 
     public void setId(long id) {
@@ -58,6 +58,6 @@ public class Driver {
     }
 
     public void setAvailable(boolean available) {
-        Available = available;
+        available = available;
     }
 }
