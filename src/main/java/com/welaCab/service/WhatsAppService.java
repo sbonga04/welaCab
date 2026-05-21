@@ -20,7 +20,24 @@ public class WhatsAppService {
     @Autowired
     private RideRepository rideRepository;
 
-    public String handleMessage(String from,String message){}
+    public void handleMessage(String from, String message) {
+        message = message.toLowerCase().trim();
+
+        //this is checking if a user exist as rider or driver
+        Rider rider = riderRepository.findByPhoneNumber(from);
+        Driver driver = driverRepository.findByPhoneNumber(from);
+
+
+        if (rider == null && driver == null) {
+            handleNewUser(from, message);
+        }
+
+        if (driver != null)
+            handleDriver(driver, message);
+
+        handleRider(rider, message);
+        //return "";
+    }
 
     private String handleNewUser(String from,String message){
         if (message.contains("rider")) {
@@ -35,7 +52,7 @@ public class WhatsAppService {
             return "Welcome to welaCab, are you a *Rider* or a *Driver*";
     }
 
-    private String handleNewRider(Rider rider,String message){
+    private String handleRider(Rider rider,String message){
         if (message.contains("ride")){
             return "Sure!, Where are you being picked up from?";
         }
