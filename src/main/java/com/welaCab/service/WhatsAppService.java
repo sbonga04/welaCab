@@ -8,6 +8,9 @@ import com.welaCab.repository.RiderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class WhatsAppService {
 
@@ -20,7 +23,7 @@ public class WhatsAppService {
     @Autowired
     private RideRepository rideRepository;
 
-    public void handleMessage(String from, String message) {
+    public String handleMessage(String from, String message) {
         message = message.toLowerCase().trim();
 
         //this is checking if a user exist as rider or driver
@@ -29,15 +32,14 @@ public class WhatsAppService {
 
 
         if (rider == null && driver == null) {
-            handleNewUser(from, message);
+           return handleNewUser(from, message);
         }
-
-        if (driver != null)
-            handleDriver(driver, message);
-
-        handleRider(rider, message);
-        //return "";
+        if (driver != null) {
+            return handleDriver(driver, message);
+        }
+        return handleRider(rider, message);
     }
+
 
     private String handleNewUser(String from,String message){
         if (message.contains("rider")) {
@@ -51,7 +53,6 @@ public class WhatsAppService {
         }else
             return "Welcome to welaCab, are you a *Rider* or a *Driver*";
     }
-
     private String handleRider(Rider rider,String message){
         if (message.contains("ride")){
             return "Sure!, Where are you being picked up from?";
@@ -67,8 +68,9 @@ public class WhatsAppService {
             driver.setAvailable(false);
             driverRepository.save(driver);
             return "You are now offline";
-            
+
         }
         return "Type 'online' to start receiving rider or 'offline' to stop";
     }
+
 }
