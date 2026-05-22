@@ -58,6 +58,6 @@ public class Driver {
     }
 
     public void setAvailable(boolean available) {
-        available = available;
+        this.available = available;
     }
 }
