@@ -43,9 +43,9 @@ public class WhatsAppService {
         if (rider == null && driver == null) {
            return handleNewUser(from, message);
         }
-        if (driver != null) {
-            return handleDriver(driver, message);
-        }
+//        if (driver != null) {
+//            return handleDriver(driver, message);
+//        }
         return handleRider(rider, message);
     }
 

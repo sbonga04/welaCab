@@ -11,7 +11,7 @@ import static org.aspectj.bridge.Message.*;
 @Service
 public class TwilioService {
 
-    @Value("$T{twilio.account.sid}")
+    @Value("${twilio.account.sid}")
     private String accountSid;
 
     @Value("${twilio.auth.token}")
@@ -22,9 +22,11 @@ public class TwilioService {
     private String to;
 
     public void sendMessage(String To,String body){
+        System.out.println("SID: " + accountSid);
+        System.out.println("Token: " + authToken);
         Twilio.init(accountSid, authToken);
         Message.creator(
-                new PhoneNumber(to),
+                new PhoneNumber(To),
                 new PhoneNumber(fromNumber),
                 body
         ).create();
