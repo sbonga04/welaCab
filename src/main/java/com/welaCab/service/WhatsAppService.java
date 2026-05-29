@@ -1,6 +1,7 @@
 package com.welaCab.service;
 
 import com.welaCab.Driver;
+import com.welaCab.Ride;
 import com.welaCab.Rider;
 import com.welaCab.repository.DriverRepository;
 import com.welaCab.repository.RideRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.sql.DriverManager.registerDriver;
@@ -80,8 +82,8 @@ public class WhatsAppService {
             return "Welcome to WelaCab, are you a *Rider* or a *Driver*";
     }
 
-    private Map<String,String> userSteps = new HashMap<>();
-    private Map<String,String> pickupLocations = new HashMap<>();
+    final private Map<String,String> userSteps = new HashMap<>();
+    final private Map<String,String> pickupLocations = new HashMap<>();
     private String handleRider(Rider rider,String message){
         String step = userSteps.getOrDefault(rider.getPhoneNumber(),"idle");
 
@@ -91,10 +93,28 @@ public class WhatsAppService {
             return "Got it! Where are you going?";
         }
         if (step.equals("awaiting_dropOff")){
-            pickupLocations.put(rider.getPhoneNumber(), message);
             String pickup = pickupLocations.get(rider.getPhoneNumber());
             userSteps.put(rider.getPhoneNumber(), "idle");
-            return "Ride requested from "+ pickup + "* to *" + message + "* Finding you a driver...";
+
+            //save ride to the database
+            Ride newRide = new Ride();
+            newRide.setRiderPhone(rider.getPhoneNumber());
+            newRide.setPickup(pickup);
+            newRide.setDropOff(message);
+            newRide.setStatus("pending");
+            rideRepository.save(newRide);
+
+            //find available driver
+            List<Driver> availableDriver = driverRepository.findByAvailableTrue();
+            if (availableDriver.isEmpty())
+                return "Sorry, No available drivers at the moment, try again later";
+
+            Driver driver = availableDriver.get(0);
+            twilioService.sendMessage(
+                    driver.getPhoneNumber(),
+                    "New ride requested!\nPickup: "+ pickup + "\nDropOff: "+ message + "\nReply YES to accept."
+            );
+            return "Driver found, We are notifying them now. Please wait";
         }
         if (message.contains("ride")){
             userSteps.put(rider.getPhoneNumber(), "awaiting_pickup");
