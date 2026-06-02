@@ -125,6 +125,20 @@ public class WhatsAppService {
 
     private String handleDriver(Driver driver, String message){
         //System.out.println("handleDriver called with message: " + message + " for driver: " + driver.getPhoneNumber());//Debugging line
+        if (message.contains("yes")){
+            Ride pendingRide = rideRepository.findByRiderPhoneAndStatus(driver.getPhoneNumber(), "pending");
+            if(pendingRide == null) {
+                return "No pending ride found";
+            }
+            pendingRide.setStatus("accepted");
+            rideRepository.save(pendingRide);
+
+            twilioService.sendMessage(
+                    pendingRide.getRiderPhone(),
+                    "Your driver " + driver.getName() + " is on the way! Vehicle: " + driver.getVehicleName() + ", Plate: " +driver.getPlateNumber()
+            );
+            return "Ride accepted! Please Head to " + pendingRide.getPickup() + " to puck your rider.";
+        }
         if (message.contains("online")) {
             driver.setAvailable(true);
             driverRepository.save(driver);
