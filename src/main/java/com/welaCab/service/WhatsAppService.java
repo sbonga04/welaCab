@@ -40,6 +40,7 @@ public class WhatsAppService {
         Driver driver = driverRepository.findByPhoneNumber(from);
 
 
+
         if (rider == null && driver == null) {
            return handleNewUser(from, message);
         }
@@ -64,6 +65,7 @@ public class WhatsAppService {
 
         userSteps.remove(from);
         return "Welcome to WelaCab " + parts[0].trim() + "! You're registered as a driver. Type 'online' to start receiving rides ";
+
     }
 
 
@@ -85,13 +87,16 @@ public class WhatsAppService {
     final private Map<String,String> userSteps = new HashMap<>();
     final private Map<String,String> pickupLocations = new HashMap<>();
     private String handleRider(Rider rider,String message){
-        String step = userSteps.getOrDefault(rider.getPhoneNumber(),"idle");
 
+
+        String step = userSteps.getOrDefault(rider.getPhoneNumber(),"idle");
         if(step.equals("awaiting_pickup")){
             pickupLocations.put(rider.getPhoneNumber(),message);
             userSteps.put(rider.getPhoneNumber(), "awaiting_dropOff");
             return "Got it! Where are you going?";
         }
+
+
         if (step.equals("awaiting_dropOff")){
             String pickup = pickupLocations.get(rider.getPhoneNumber());
             userSteps.put(rider.getPhoneNumber(), "idle");
@@ -104,6 +109,7 @@ public class WhatsAppService {
             newRide.setStatus("pending");
             rideRepository.save(newRide);
 
+
             //find available driver
             List<Driver> availableDriver = driverRepository.findByAvailableTrue();
             if (availableDriver.isEmpty())
@@ -114,6 +120,10 @@ public class WhatsAppService {
                     driver.getPhoneNumber(),
                     "New ride requested!\nPickup: "+ pickup + "\nDropOff: "+ message + "\nReply YES to accept."
             );
+            Driver drivers = availableDriver.get(0);
+            newRide.setDriverPhone(drivers.getPhoneNumber());
+            rideRepository.save(newRide);
+
             return "Driver found, We are notifying them now. Please wait";
         }
         if (message.contains("ride")){
