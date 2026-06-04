@@ -114,17 +114,18 @@ public class WhatsAppService {
             List<Driver> availableDriver = driverRepository.findByAvailableTrue();
             if (availableDriver.isEmpty())
                 return "Sorry, No available drivers at the moment, try again later";
+            else {
+                Driver driver = availableDriver.get(0);
+                twilioService.sendMessage(
+                        driver.getPhoneNumber(),
+                        "New ride requested!\nPickup: " + pickup + "\nDropOff: " + message + "\nReply YES to accept."
+                );
+                Driver drivers = availableDriver.get(0);
+                newRide.setDriverPhone(drivers.getPhoneNumber());
+                rideRepository.save(newRide);
 
-            Driver driver = availableDriver.get(0);
-            twilioService.sendMessage(
-                    driver.getPhoneNumber(),
-                    "New ride requested!\nPickup: "+ pickup + "\nDropOff: "+ message + "\nReply YES to accept."
-            );
-            Driver drivers = availableDriver.get(0);
-            newRide.setDriverPhone(drivers.getPhoneNumber());
-            rideRepository.save(newRide);
-
-            return "Driver found, We are notifying them now. Please wait";
+                return "Driver found, We are notifying them now. Please wait";
+            }
         }
         if (message.contains("ride")){
             userSteps.put(rider.getPhoneNumber(), "awaiting_pickup");
