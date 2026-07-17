@@ -11,7 +11,7 @@ Built with **Spring Boot**, **MySQL**, and **Twilio**.
 
 Many rural communities have little or no access to ride-hailing services.
 WelaCab aims to bridge that gap by allowing people to book rides using the one app.
-Almost everyone already has—**WhatsApp**.
+Almost everyone already has **WhatsApp**.
 
 The project is inspired by communities such as **uMhlabuyalingana, KwaZulu-Natal**, where traditional ride-hailing platforms are unavailable.
 
