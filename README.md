@@ -5,7 +5,7 @@ that are not served by Uber, Bolt, or similar services.
 
 Built with **Spring Boot**, **MySQL**, and **Twilio**.
 
----
+
 
 ## 🌍 Why WelaCab?
 
