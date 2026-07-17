@@ -6,7 +6,7 @@ import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import static org.aspectj.bridge.Message.*;
+//import static org.aspectj.bridge.Message.*;
 
 @Service
 public class TwilioService {
@@ -19,7 +19,6 @@ public class TwilioService {
 
     @Value("${twilio.whatsapp.number}")
     private String fromNumber;
-    private String to;
 
     public void sendMessage(String To,String body){
         System.out.println("SID: " + accountSid);

@@ -21,12 +21,14 @@ public class WhatsAppService {
     private TwilioService twilioService;
     @Autowired
     private RiderRepository riderRepository;
-
     @Autowired
     private DriverRepository driverRepository;
 
     @Autowired
     private RideRepository rideRepository;
+
+    final private Map<String,String> userSteps = new HashMap<>();
+    final private Map<String,String> pickupLocations = new HashMap<>();
 
     public String handleMessage(String from, String message) {
         message = message.toLowerCase().trim();
@@ -68,8 +70,8 @@ public class WhatsAppService {
 
     }
 
-
     private Map<String,String> pendingDrivers = new HashMap<>();
+
     private String handleNewUser(String from,String message){
         if (message.contains("rider")) {
             Rider newRider = new Rider();
@@ -83,9 +85,6 @@ public class WhatsAppService {
         }else
             return "Welcome to WelaCab, are you a *Rider* or a *Driver*";
     }
-
-    final private Map<String,String> userSteps = new HashMap<>();
-    final private Map<String,String> pickupLocations = new HashMap<>();
     private String handleRider(Rider rider,String message){
 
 
@@ -143,7 +142,6 @@ public class WhatsAppService {
             }
             pendingRide.setStatus("accepted");
             rideRepository.save(pendingRide);
-
             twilioService.sendMessage(
                     pendingRide.getRiderPhone(),
                     "Your driver " + driver.getName() + " is on the way! Vehicle: " + driver.getVehicleName() + ", Plate: " +driver.getPlateNumber()

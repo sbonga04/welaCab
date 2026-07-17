@@ -11,7 +11,7 @@ public class Ride {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String riderPhone;
     private String driverPhone;
@@ -20,7 +20,7 @@ public class Ride {
     private String status; // pending, accepted, completed
     private LocalDateTime createdAt;
 
-    @PrePersist
+    //@PrePersist
     protected void onCreate(){
         createdAt = LocalDateTime.now();
     }

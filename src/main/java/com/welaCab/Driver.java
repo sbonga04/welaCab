@@ -5,20 +5,14 @@ import jakarta.persistence.*;
 @Entity
 @Table (name = "drivers")
 public class Driver {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
-
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String phoneNumber;
     private String vehicleName;
     private String plateNumber;
     private boolean available;
-
-    public long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -59,5 +53,9 @@ public class Driver {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
