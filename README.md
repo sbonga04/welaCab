@@ -19,8 +19,8 @@ The project is inspired by communities such as **uMhlabuyalingana, KwaZulu-Natal
 
 ## ✨ Features
 
--  No mobile app required—everything happens on WhatsApp.
--  Riders request rides by sending their pickup and drop-off locations.
+-  No mobile app required everything happens on WhatsApp.
+-  Riders request rides by sending their pickup and drop off locations.
 -  Nearby available drivers receive ride requests instantly via WhatsApp.
 -  Simple conversational interface powered by Twilio's WhatsApp API.
 -  Ride and user data stored in MySQL.
