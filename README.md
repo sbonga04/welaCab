@@ -1,11 +1,11 @@
-# welcome to WelaCab!
+# Welcome to WelaCab!
 
 A WhatsApp based ride hailing system designed for small towns and rural communities,
 that are not served by Uber, Bolt, or similar services.
 
 Built with **Spring Boot**, **MySQL**, and **Twilio**.
 
----
+
 
 ##  Why WelaCab?
 
@@ -15,7 +15,6 @@ Almost everyone already has **WhatsApp**.
 
 The project is inspired by communities such as **uMhlabuyalingana, KwaZulu-Natal(my home town)**, where traditional ride hailing platforms are not a thing.
 
----
 
 ##  Features
 
@@ -36,6 +35,6 @@ The project is inspired by communities such as **uMhlabuyalingana, KwaZulu-Natal
 5. A driver accepts the request.
 6. The rider is notified that a driver is on the way.
 
----
+
 ## Project Status
  Currently under development 🚧 .
