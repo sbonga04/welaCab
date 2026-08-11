@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="CXwpn-pC9h0kufwzyG9k">
+    <mxGraphModel dx="1030" dy="582" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nEM2J7Re6ub07eehHs3v-1" parent="1" style="html=1;whiteSpace=wrap;shape=isoCube2;backgroundOutline=1;isoAngle=15;fillColor=light-dark(#60A917,#5D8987);fontColor=#ffffff;strokeColor=#2D7600;gradientColor=default;gradientDirection=east;dashed=1;" value="" vertex="1">
+          <mxGeometry height="100" width="90" x="150" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="nEM2J7Re6ub07eehHs3v-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#1ba1e2;sketch=1;" value="" vertex="1">
+          <mxGeometry height="170" width="230" x="350" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="nEM2J7Re6ub07eehHs3v-3" parent="1" style="shape=image;html=1;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=1;aspect=fixed;image=img/clipart/Gear_128x128.png" value="" vertex="1">
+          <mxGeometry height="61" width="52" x="130" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="nEM2J7Re6ub07eehHs3v-4" edge="1" parent="1" source="nEM2J7Re6ub07eehHs3v-3" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="nEM2J7Re6ub07eehHs3v-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="290" y="340" as="sourcePoint" />
+            <mxPoint x="340" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
