@@ -28,7 +28,7 @@ public class WhatsappService {
     @Autowired
     private RiderRepository riderRepository;
 
-    public String handleMessege(String from,String message){
+    public String handleNewMessege(String from,String message){
         message = message.toLowerCase().trim();
 
         //check if the number exist as any of the users
@@ -40,30 +40,41 @@ public class WhatsappService {
 
 //        if (driver != null)
 //            handleDriver(from,message);
-        return handleRider(from,message);
+        return driverSide(from,message);
     }
     private String handleNewUser(String from,String message){
 
         if(message.contains("ride"))
-            handleRider(from,message);
+            clientSide(from,message);
 
         else if (message.contains("driver"))
             /* some block of code */
-            handleDriver(from,message);
+            driverSide(from,message);
 
         return "Hi, Welcome to WelaCab, are you a *Rider* or a *Diver*";
     }
+    private String registerRider(String from,String message){
 
-    private String handleRider(String from,String message){
         Rider newRider = new Rider();
         newRider.setCellNumber(from);
         newRider.setName("New Rider");
         riderRepository.save(newRider);
 
+        return "";}
+    private String registerDriver(String from,String message){
+
+        //if (message != null && message.contains("driver"))
+//        message = message.toLowerCase().trim();
+//        String[] messege =
+//        Driver newDriver = new Driver();
+//        newDriver.setVehicleName();
+//
+        return "";}
+    private String clientSide(String from,String message){
 
         return "Welcome to WelaCab! you are registered as a rider. Type ride to request a ride";
     }
-    private String handleDriver(String from,String message){
+    private String driverSide(String from,String message){
 
         Driver newDriver = new Driver();
         newDriver.setName("New Driver");

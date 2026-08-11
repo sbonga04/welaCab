@@ -23,7 +23,7 @@ public class WhatsappController {
             @RequestParam("Body") String body) {
 
         //Messege handling(formating)
-        String response = whatsappService.handleMessege(from,body);
+        String response = whatsappService.handleNewMessege(from,body);
         String xml = String.format("<Response><Message>%s</Message></Response>", response);
 
         HttpHeaders headers = new HttpHeaders();
