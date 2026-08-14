@@ -54,6 +54,8 @@ public class WhatsappService {
         return "Hi, Welcome to WelaCab, are you a *Rider* or a *Diver*";
     }
     private String registerRider(String from,String message){
+        System.out.println("To register as driver please reply with e.g Your name, Car,Number plate, cellNumber separated by comma ,");
+
 
         Rider newRider = new Rider();
         newRider.setCellNumber(from);
@@ -63,11 +65,11 @@ public class WhatsappService {
         return "";}
     private String registerDriver(String from,String message){
 
-        //if (message != null && message.contains("driver"))
-//        message = message.toLowerCase().trim();
-//        String[] messege =
-//        Driver newDriver = new Driver();
-//        newDriver.setVehicleName();
+        String[] parts = message.split(",");
+        if(parts.length < 3)
+            return "Invalid input.. please register using this format Your name, Car,Number plate, cellNumber" ;
+
+
 //
         return "";}
     private String clientSide(String from,String message){
