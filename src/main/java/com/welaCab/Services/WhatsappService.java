@@ -4,6 +4,7 @@ import com.welaCab.Driver;
 import com.welaCab.Repository.DriverRepository;
 import com.welaCab.Repository.RideRepository;
 import com.welaCab.Repository.RiderRepository;
+import com.welaCab.Ride;
 import com.welaCab.Rider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,11 +70,23 @@ public class WhatsappService {
         if(parts.length < 3)
             return "Invalid input.. please register using this format Your name, Car,Number plate, cellNumber" ;
 
+        Driver newDriver = new Driver();
+        newDriver.setName(parts[0].trim());
+        newDriver.setVehicleName(parts[1].trim());
+        newDriver.setPlateNumber(parts[2].trim());
+        newDriver.setPhoneNumber(parts[3].trim());
+        driverRepository.save(newDriver);
+
 
 //
-        return "";}
+        return "Welcome to WelaCab" + parts[0] + " You are now registerd as a driver. Type online to 'start' recieving rides";}
     private String clientSide(String from,String message){
 
+        Ride newRide = new Ride();
+        newRide.getPickup();
+        newRide.getDropOff();
+        newRide.getCreatedAt();
+        newRide.getRiderPhoneNumber();
         return "Welcome to WelaCab! you are registered as a rider. Type ride to request a ride";
     }
     private String driverSide(String from,String message){
