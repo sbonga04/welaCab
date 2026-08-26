@@ -9,7 +9,8 @@ public class WhatsappService {
     @Autowired
     private TwilioService twilioService;
 
-
-
-    public String handleMessege(){return "";}
+    public String handleMessege(String from,String message){
+        System.out.println("welcome home");
+        return "welcome to welacab";}
+    //not crashing, but it's not giving me what i'm looking for
 }
